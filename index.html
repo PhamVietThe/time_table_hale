@@ -3,27 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pastel Schedule Pro ✨</title>
+    <title>Contrast Pastel Schedule ✨</title>
     <style>
         :root {
-            --bg-color: #e0f2f1; /* Xanh pastel dịu mắt hơn */
-            --card-bg: rgba(255, 255, 255, 0.9);
-            --primary-blue: #a2d2ff;
-            --accent-green: #b9f2e1;
-            --text-main: #4a5568;
+            /* Bảng màu tương phản cao */
+            --bg-deep: #1a365d; /* Xanh đậm sang trọng */
+            --card-mint: #ccfbf1; /* Xanh mint sáng */
+            --text-dark: #1e293b;
+            --accent-yellow: #fef08a; /* Điểm xuyết cho các chi tiết quan trọng */
+            --btn-hover: #38bdf8;
         }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.9); }
+            70% { transform: scale(1.05); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
         body {
-            font-family: 'Segoe UI', cursive, sans-serif;
-            background-color: var(--bg-color);
-            background-image: radial-gradient(#ffffff 1px, transparent 1px);
-            background-size: 30px 30px; /* Họa tiết chấm bi chìm cute */
-            color: var(--text-main);
+            font-family: 'Lexend', 'Segoe UI', sans-serif;
+            background-color: var(--bg-deep);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(56, 189, 248, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(204, 251, 241, 0.1) 0%, transparent 20%);
+            color: white;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -32,129 +35,147 @@
             min-height: 100vh;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-            animation: fadeInUp 0.8s ease-out;
+        .header h1 {
+            color: var(--card-mint);
+            font-size: 2.8rem;
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+            margin-bottom: 10px;
+            animation: bounceIn 0.6s ease;
         }
-
-        h1 { color: #5dade2; font-size: 2.5rem; margin: 0; text-shadow: 2px 2px white; }
 
         .week-controls {
             display: flex;
             align-items: center;
-            gap: 25px;
-            margin-bottom: 30px;
-            background: var(--card-bg);
-            padding: 12px 25px;
-            border-radius: 30px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            animation: fadeInUp 1s ease-out;
+            gap: 20px;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         button {
-            background: var(--primary-blue);
+            background: var(--card-mint);
             border: none;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 15px;
+            color: var(--text-dark);
+            padding: 10px 25px;
+            border-radius: 25px;
             cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 4px 0 #85b8e6;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         button:hover {
+            background: var(--btn-hover);
+            color: white;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
             transform: scale(1.1);
-            background: #85c1e9;
         }
 
-        button:active { transform: translateY(3px); box-shadow: none; }
-
         #current-week-display {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: bold;
-            color: #5499c7;
-            min-width: 100px;
-            text-align: center;
+            color: var(--accent-yellow);
         }
 
         .timetable {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
             width: 100%;
-            max-width: 1100px;
+            max-width: 1200px;
         }
 
         .day-card {
-            background: var(--card-bg);
-            border-radius: 20px;
+            background: var(--card-mint);
+            border-radius: 24px;
             padding: 20px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.04);
-            border: 2px solid white;
-            transition: all 0.3s ease;
-            animation: fadeInUp 0.5s ease backwards;
+            color: var(--text-dark);
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.2); /* Đổ bóng cứng tạo nét cute/pop-art */
+            transition: all 0.4s ease;
+            animation: bounceIn 0.5s ease backwards;
         }
 
         .day-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-            background: white;
+            transform: translate(-5px, -5px);
+            box-shadow: 15px 15px 0px var(--btn-hover);
         }
 
         .day-title {
             text-align: center;
-            font-weight: 800;
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            color: #3498db;
-            background: var(--accent-green);
-            padding: 5px;
-            border-radius: 10px;
+            font-weight: 900;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            padding: 8px;
+            background: rgba(0,0,0,0.05);
+            border-radius: 12px;
+            color: #1a365d;
         }
 
         .slot {
-            background: #f8fafc;
-            margin-bottom: 12px;
-            padding: 12px;
-            border-radius: 12px;
-            border-left: 5px solid var(--primary-blue);
-            transition: background 0.2s;
+            background: white;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 18px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
         }
 
-        .slot:hover { background: #edf2f7; }
+        .slot:hover {
+            border-color: var(--bg-deep);
+            transform: scale(1.02);
+        }
 
-        .time { font-weight: bold; color: #5dade2; font-size: 0.9rem; }
-        .subject { display: block; margin-top: 5px; font-weight: 600; font-size: 0.95rem; }
-        .room { display: block; margin-top: 3px; color: #94a3b8; font-size: 0.8rem; font-style: italic; }
+        .time { 
+            font-weight: bold; 
+            color: #2563eb; 
+            font-size: 0.85rem;
+            background: #dbeafe;
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+
+        .subject { 
+            display: block; 
+            margin-top: 8px; 
+            font-weight: 700; 
+            line-height: 1.4;
+        }
+
+        .room { 
+            display: block; 
+            margin-top: 5px; 
+            color: #64748b; 
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
 
         .empty-msg {
             text-align: center;
-            color: #cbd5e1;
-            padding: 30px 0;
-            font-size: 0.9rem;
+            padding: 40px 0;
+            opacity: 0.5;
+            font-style: italic;
         }
 
-        /* Stagger animation for cards */
-        .day-card:nth-child(1) { animation-delay: 0.1s; }
-        .day-card:nth-child(2) { animation-delay: 0.2s; }
-        .day-card:nth-child(3) { animation-delay: 0.3s; }
-        .day-card:nth-child(4) { animation-delay: 0.4s; }
-
+        @media (max-width: 600px) {
+            .header h1 { font-size: 2rem; }
+            .week-controls { gap: 10px; padding: 10px 15px; }
+        }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <h1>☁️ My Schedule ☁️</h1>
-        <p>Keep calm and study on!</p>
+        <h1>🗓️ Study Planner</h1>
     </div>
 
     <div class="week-controls">
-        <button onclick="changeWeek(-1)">◀ Prev</button>
-        <span id="current-week-display">Week 26</span>
-        <button onclick="changeWeek(1)">Next ▶</button>
+        <button onclick="changeWeek(-1)">Lùi</button>
+        <span id="current-week-display">Tuần 26</span>
+        <button onclick="changeWeek(1)">Tiếp</button>
     </div>
 
     <div class="timetable" id="timetable-container">
@@ -165,9 +186,9 @@
 
         const scheduleData = {
             fixed: {
-                3: [{ time: "14:00 - 15:00", name: "Cầu lông 1", room: "NTD" }],
+                3: [{ time: "14:00 - 15:00", name: "Cầu lông 1", room: "Nhà thi đấu" }],
                 4: [
-                    { time: "08:00 - 09:00", name: "Bóng đá 1", room: "SVD" },
+                    { time: "08:00 - 09:00", name: "Bóng đá 1", room: "Sân vận động" },
                     { time: "09:20 - 11:45", name: "Tiếng Anh Hóa - Môi trường", room: "D8-303" },
                     { time: "14:10 - 15:50", name: "Kỹ năng giao tiếp", room: "D8-305" }
                 ],
@@ -176,8 +197,8 @@
                     { time: "12:30 - 14:55", name: "Văn hóa xã hội Anh", room: "D8-301" }
                 ],
                 6: [
-                    { time: "07:30 - 09:10", name: "Tiếng Anh Kỹ thuật Điện", room: "D8-301" },
-                    { time: "09:20 - 11:45", name: "Tiếng Anh Kinh tế & Kinh doanh", room: "D8-301" },
+                    { time: "07:30 - 09:10", name: "Tiếng Anh Kỹ thuật Điện - Điện tử", room: "D8-301" },
+                    { time: "09:20 - 11:45", name: "Tiếng Anh Kinh tế và Kinh doanh", room: "D8-301" },
                     { time: "14:10 - 15:50", name: "Lý thuyết biên - phiên dịch", room: "D8-303" }
                 ]
             },
@@ -191,8 +212,6 @@
             const container = document.getElementById('timetable-container');
             const weekDisplay = document.getElementById('current-week-display');
             weekDisplay.innerText = `Tuần ${currentWeek}`;
-            
-            // Re-trigger animation by clearing and re-adding
             container.innerHTML = '';
 
             const days = [
@@ -207,10 +226,10 @@
 
                 if (day.id === 3) {
                     if (scheduleData.trietHoc.lyThuyetWeeks.includes(currentWeek)) {
-                        dayHtml += createSlotHtml("07:30 - 11:00", "Triết học Mác (LT)", "D3-5-401");
+                        dayHtml += createSlotHtml("07:30 - 11:00", "Triết học Mác - Lênin (LT)", "D3-5-401");
                         hasClasses = true;
                     } else if (scheduleData.trietHoc.baiTapWeeks.includes(currentWeek)) {
-                        dayHtml += createSlotHtml("08:25 - 10:05", "Triết học Mác (BT)", "D9-204");
+                        dayHtml += createSlotHtml("08:25 - 10:05", "Triết học Mác - Lênin (BT)", "D9-204");
                         hasClasses = true;
                     }
                 }
@@ -222,7 +241,7 @@
                     });
                 }
 
-                if (!hasClasses) dayHtml += `<div class="empty-msg">Nghỉ ngơi thôi! ✨</div>`;
+                if (!hasClasses) dayHtml += `<div class="empty-msg">Chưa có lịch học ✨</div>`;
                 dayHtml += `</div>`;
                 container.innerHTML += dayHtml;
             });
@@ -231,7 +250,7 @@
         function createSlotHtml(time, name, room) {
             return `
                 <div class="slot">
-                    <span class="time">🕒 ${time}</span>
+                    <span class="time">⏰ ${time}</span>
                     <span class="subject">${name}</span>
                     <span class="room">📍 ${room}</span>
                 </div>
